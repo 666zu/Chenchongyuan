@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+    <title>2016/11/11</title>
+    <style type="text/css">
+#first{
+    padding-right:10px;
+    }
+#third{
+    padding-left:10px;
+    }
+input{
+    height:30px;
+    width:300px;
+    color: #A9A9A9;
+    border-radius:5px;
+    }
+button{
+    background-color:#4682B4;
+    color:#FFF;
+    border-radius:5px;
+    height:30px;
+    width:60px;
+    }
+#info{
+    font-size:9px;
+    color: #AAAAAA;
+    }
+    </style>
+</head>
+<body>
+    <table align="center">
+        <tr>
+            <td id="first">名称</td>
+            <td><input type="text" style="border:1px solid;"></td>
+            <td id="third"><button>验证</button></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td id="info">必填，长度为4-16个字符</td>
+            <td></td>
+        </tr>
+    </table>
+    <script type="text/javascript">
+        var inputName = document.getElementsByTagName('input')[0];
+        var infoWord = document.getElementById('info');
+        document.getElementsByTagName('button')[0].onclick = validate;
+        function validate(){
+            var inputValue = inputName.value;
+            if(countLength(inputValue) == 0){
+                infoWord.innerHTML = '姓名不能为空';
+                infoWord.style.color = 'red';
+                inputName.style.border = '1px solid red';
+            }else if(countLength(inputValue)>=4&&countLength(inputValue)<=16){
+                infoWord.innerHTML = '名称格式正确';
+                infoWord.style.color = 'lightgreen';
+                inputName.style.border = '1px solid lightgreen';
+            }else{
+                infoWord.innerHTML = '请输入长度为4~16位字符';
+                infoWord.style.color = 'red'
+                inputName.style.border = '1px solid red';
+            }
+        }  
+        function countLength(str){
+            var getLength = 0;
+            for(var i = 0; i < str.length; i++){
+                var countCode = str.charCodeAt(i);
+                if(countCode>= 0&&countCode<=128){
+                    getLength += 1;
+                }else{
+                    getLength += 2;
+                }
+            }
+            return getLength;
+        }
+    </script>
+</body>
+</html>
